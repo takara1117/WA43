@@ -1,30 +1,34 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const pBgColor = ref("white");
-const onPClick = (bgColor: string): void => {
-  pBgColor.value = bgColor;
-};
-
-const pMsg = ref("イベント前(ここをクリック!)");
-const pBgColorEvent = ref("white");
-const onPClickWithEvent = (bgColor: string, event: MouseEvent): void => {
-  pBgColorEvent.value = bgColor;
-  pMsg.value = event.timeStamp.toString();
-};
-
+const pBgColor = ref("");
 const msg = ref("");
-const onFormSubmit = (): void => {
-  msg.value = "OK";
+const msgColor = ref("");
+
+const onClickCheck = (event: Event): void => {
+  const element = event.target as HTMLInputElement;
+  if (element.value == "") {
+    pBgColor.value = "pink";
+    msg.value = "お名前の入力は必須です。";
+    msgColor.value = "red";
+  } else {
+    pBgColor.value = "white";
+    msg.value = "OK";
+    msgColor.value = "green";
+  }
 };
 </script>
 
 <template>
-  <label>お名前</label><br />
-  <input
-    type="text"
-    v-on:click="onPClickWithEvent('pink', $event)"
-    v-bind:style="{ backgroundColor: pBgColorEvent }"
-  />
-  <p>{{ msg }}</p>
+  <label
+    >お名前<br />
+    <input
+      type="text"
+      v-on:blur="onClickCheck"
+      v-bind:style="{ backgroundColor: pBgColor }"
+    />
+    <p v-on:blur="onClickCheck" v-bind:style="{ color: msgColor }">
+      {{ msg }}
+    </p>
+  </label>
 </template>
