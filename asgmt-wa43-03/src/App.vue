@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+//初期値
 const memberDataList = new Map<number, Member>();
 memberDataList.set(4451, {
   id: 4451,
@@ -29,6 +30,7 @@ memberDataList.set(4482, {
 });
 const memberList = ref(memberDataList);
 
+//型指定
 interface Member {
   id: number;
   name: string;
@@ -44,6 +46,7 @@ let getMail = ref();
 let getTel = ref();
 let getNote = ref();
 
+//値取得
 const editMemberInfo = (
   id: number,
   name: string,
@@ -59,6 +62,7 @@ const editMemberInfo = (
   getNote.value = note;
 };
 
+//入力値の代入
 const editInfo = (getId: number): void => {
   const editData = memberList.value.get(getId) as Member;
   console.log(editData);
