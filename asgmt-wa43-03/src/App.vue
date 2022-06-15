@@ -54,7 +54,7 @@ const editMemberInfo = (
   tel: string,
   note?: string
 ): void => {
-  showOrNot.value = true;
+  showOrNot.value = true; //編集ボタン押した時にform出す
   getId.value = id;
   getName.value = name;
   getMail.value = mail;
@@ -65,42 +65,41 @@ const editMemberInfo = (
 //入力値の代入
 const editInfo = (getId: number): void => {
   const editData = memberList.value.get(getId) as Member;
-  console.log(editData);
   editData.name = getName.value;
   editData.mail = getMail.value;
   editData.tel = getTel.value;
   editData.note = getNote.value;
+
+  //変更ボタン押した時にform消す
   showOrNot.value = false;
 };
 </script>
 
 <template>
-  <section>
-    <template v-for="[id, memberItem] in memberList" v-bind:key="id">
-      <li>{{ memberItem.name }}</li>
-      ID
-      <dd>{{ memberItem.id }}</dd>
-      メールアドレス
-      <dd>{{ memberItem.mail }}</dd>
-      電話番号
-      <dd>{{ memberItem.tel }}</dd>
-      <dd>{{ memberItem.note }}</dd>
+  <template v-for="[id, memberItem] in memberList" v-bind:key="id">
+    <li>{{ memberItem.name }}</li>
+    ID
+    <dd>{{ memberItem.id }}</dd>
+    メールアドレス
+    <dd>{{ memberItem.mail }}</dd>
+    電話番号
+    <dd>{{ memberItem.tel }}</dd>
+    <dd>{{ memberItem.note }}</dd>
 
-      <button
-        v-on:click="
-          editMemberInfo(
-            memberItem.id,
-            memberItem.name,
-            memberItem.mail,
-            memberItem.tel,
-            memberItem.note
-          )
-        "
-      >
-        このメンバー情報を編集
-      </button>
-    </template>
-  </section>
+    <button
+      v-on:click="
+        editMemberInfo(
+          memberItem.id,
+          memberItem.name,
+          memberItem.mail,
+          memberItem.tel,
+          memberItem.note
+        )
+      "
+    >
+      このメンバー情報を編集
+    </button>
+  </template>
   <form action="#" v-show="showOrNot" v-on:submit.prevent="editInfo(getId)">
     <p>必要な情報を入力してください。</p>
     ID
@@ -119,6 +118,6 @@ const editInfo = (getId: number): void => {
 
 <style>
 form dd {
-  padding-top: 3px;
+  padding-top: 5px;
 }
 </style>
