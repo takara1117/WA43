@@ -1,81 +1,48 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from "vue";
+import OneMember from "./components/OneMember.vue";
+import type { Member } from "./interfaces";
+
+const memberListInit = new Map<number, Member>();
+memberListInit.set(4451, {
+  id: 4451,
+  name: "しんちゃん",
+  mail: "shin@hoge.com",
+  tel: "09012345678",
+  note: "ちょ～イケメン。",
+});
+memberListInit.set(4463, {
+  id: 4463,
+  name: "たけちゃん",
+  mail: "take@hoge.com",
+  tel: "08098765432",
+});
+memberListInit.set(4474, {
+  id: 4474,
+  name: "けんちゃん",
+  mail: "ken@hoge.com",
+  tel: "07045678912",
+});
+memberListInit.set(4482, {
+  id: 4482,
+  name: "だいちゃん",
+  mail: "dai@hoge.com",
+  tel: "09078459632",
+});
+const memberList = ref(memberListInit);
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <section>
+    <h1>WA43 課題4 子コンポーネント連携の確認</h1>
+    <OneMember
+      v-for="[id, member] in memberList"
+      v-bind:key="id"
+      v-bind:id="id"
+      v-bind:name="member.name"
+      v-bind:mail="member.mail"
+      v-bind:tel="member.tel"
+      v-bind:note="member.note"
+    />
+  </section>
 </template>
-
-<style>
-@import './assets/base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-}
-</style>
