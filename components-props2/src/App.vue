@@ -15,7 +15,7 @@ memberListInit.set(47783, {
   id: 47783,
   name: "鈴木二郎",
   email: "mue@example.com",
-  points: 1553,
+  points: 53,
 });
 const memberList = ref(memberListInit);
 
