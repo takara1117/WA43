@@ -9,7 +9,7 @@ memberListInit.set(4451, {
   name: "しんちゃん",
   mail: "shin@hoge.com",
   tel: "09012345678",
-  note: "ちょ～イケメン。",
+  note: "へんなやつ",
 });
 memberListInit.set(4463, {
   id: 4463,
